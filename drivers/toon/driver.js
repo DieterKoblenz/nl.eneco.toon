@@ -272,7 +272,9 @@ module.exports.capabilities = {
 
 			// Check if found
 			if (device && device.client && temperatureState) {
-
+				// limit temperature
+				if( temperatureState < 5 ) 	temperatureState = 5;
+				if( temperatureState > 30 ) 	temperatureState = 30;
 				// Set temperature via api
 				device.client.updateState(temperatureState)
 					.then(() => callback(null, temperatureState))
